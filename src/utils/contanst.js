@@ -1,1 +1,1 @@
-export const WEB_URL="https://snipitt.in/"
+export const WEB_URL="https://snipitt.netlify.app/"
