@@ -5,6 +5,7 @@ import { Copy, Download, LinkIcon, Trash } from "lucide-react";
 import { Link } from "react-router-dom";
 import useFetch from "@/hooks/useFetch";
 import { deleteUrl } from "@/db/apiUrls";
+import { WEB_URL } from "@/utils/contanst";
 
 const LinkCard = ({url = [], fetchUrls}) => {
     const downloadImage = () => {
@@ -40,7 +41,7 @@ const LinkCard = ({url = [], fetchUrls}) => {
             {url?.title}
           </span>
           <span className="text-2xl text-blue-400 font-bold hover:underline cursor-pointer">
-            https://snipit.in/{url?.custom_url ? url?.custom_url : url.short_url}
+            {WEB_URL}{url?.custom_url ? url?.custom_url : url.short_url}
           </span>
           <span className="flex items-center gap-1 hover:underline cursor-pointer">
             <LinkIcon className="p-1" />
@@ -54,7 +55,7 @@ const LinkCard = ({url = [], fetchUrls}) => {
           <Button
             variant="ghost"
             onClick={() =>
-              navigator.clipboard.writeText(`https://snipit.in/${url?.short_url}`)
+              navigator.clipboard.writeText(`${WEB_URL}${url?.short_url}`)
             }
           >
             <Copy />
