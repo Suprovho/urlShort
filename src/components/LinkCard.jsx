@@ -5,7 +5,7 @@ import { Copy, Download, LinkIcon, Trash } from "lucide-react";
 import { Link } from "react-router-dom";
 import useFetch from "@/hooks/useFetch";
 import { deleteUrl } from "@/db/apiUrls";
-import { WEB_URL, truncateURL } from "@/utils/contanst";
+import { WEB_URL, longtruncateURL, truncateURL } from "@/utils/contanst";
 
 const LinkCard = ({url = [], fetchUrls}) => {
     const downloadImage = () => {
@@ -31,6 +31,7 @@ const LinkCard = ({url = [], fetchUrls}) => {
     
     const short_url= `${WEB_URL}${url?.custom_url ? url?.custom_url : url.short_url}`
     const truncatedURL = truncateURL(short_url);
+    const original_url=longtruncateURL(url?.original_url)
 
   
     return (
@@ -47,9 +48,9 @@ const LinkCard = ({url = [], fetchUrls}) => {
           <span className="text-2xl text-blue-400 font-bold hover:underline cursor-pointer">
             {truncatedURL}
           </span>
-          <span className="flex items-center gap-1 hover:underline cursor-pointer">
+          <span className="flex items-center gap-1 hover:underline cursor-pointer text-wrap">
             <LinkIcon className="p-1" />
-            {url?.original_url}
+            {original_url}
           </span>
           <span className="flex items-end font-extralight text-sm flex-1">
             {new Date(url?.created_at).toLocaleString()}

@@ -7,7 +7,7 @@ import { UrlState } from "@/context";
 import { getClicksForUrl } from "@/db/apiClicks";
 import { deleteUrl, getUrl } from "@/db/apiUrls";
 import useFetch from "@/hooks/useFetch";
-import { WEB_URL, truncateURL } from "@/utils/contanst";
+import { WEB_URL, longtruncateURL, truncateURL } from "@/utils/contanst";
 import { Copy, Download, LinkIcon, Trash } from "lucide-react";
 import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom"
@@ -71,6 +71,7 @@ const Link = () => {
 
   const short_url= `${WEB_URL}${link}`
   const truncatedURL = truncateURL(short_url);
+  const original_url=longtruncateURL(url?.original_url)
 
   return (
     <>
@@ -93,7 +94,7 @@ const Link = () => {
             className="flex items-center gap-1 hover:underline cursor-pointer"
           >
             <LinkIcon className="p-1" />
-            {url?.original_url}
+            {original_url}
           </a>
           <span className="flex items-end font-extralight text-sm">
             {new Date(url?.created_at).toLocaleString()}
