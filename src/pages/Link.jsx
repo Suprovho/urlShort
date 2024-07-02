@@ -7,7 +7,7 @@ import { UrlState } from "@/context";
 import { getClicksForUrl } from "@/db/apiClicks";
 import { deleteUrl, getUrl } from "@/db/apiUrls";
 import useFetch from "@/hooks/useFetch";
-import { WEB_URL } from "@/utils/contanst";
+import { WEB_URL, truncateURL } from "@/utils/contanst";
 import { Copy, Download, LinkIcon, Trash } from "lucide-react";
 import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom"
@@ -69,6 +69,9 @@ const Link = () => {
     link = url?.custom_url ? url?.custom_url : url.short_url;
   }
 
+  const short_url= `${WEB_URL}${link}`
+  const truncatedURL = truncateURL(short_url);
+
   return (
     <>
       {(loading || loadingStats) && (
@@ -80,9 +83,9 @@ const Link = () => {
          <a
             href={`${WEB_URL}${link}`}
             target="_blank"
-            className="text-3xl sm:text-4xl text-blue-400 font-bold hover:underline cursor-pointer"
+            className="text-2xl sm:text-4xl text-blue-400 font-bold hover:underline cursor-pointer"
           >
-            {WEB_URL+link}
+            {truncatedURL}
           </a>
           <a
             href={url?.original_url}

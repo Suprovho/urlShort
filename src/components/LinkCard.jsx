@@ -5,7 +5,7 @@ import { Copy, Download, LinkIcon, Trash } from "lucide-react";
 import { Link } from "react-router-dom";
 import useFetch from "@/hooks/useFetch";
 import { deleteUrl } from "@/db/apiUrls";
-import { WEB_URL } from "@/utils/contanst";
+import { WEB_URL, truncateURL } from "@/utils/contanst";
 
 const LinkCard = ({url = [], fetchUrls}) => {
     const downloadImage = () => {
@@ -28,6 +28,10 @@ const LinkCard = ({url = [], fetchUrls}) => {
     };
   
     const{loading:loadingDelete,fn:fnDelete}=useFetch(deleteUrl,url.id)
+    
+    const short_url= `${WEB_URL}${url?.custom_url ? url?.custom_url : url.short_url}`
+    const truncatedURL = truncateURL(short_url);
+
   
     return (
       <div className="flex flex-col md:flex-row gap-5 border p-4 bg-gray-900 rounded-lg">
@@ -41,7 +45,7 @@ const LinkCard = ({url = [], fetchUrls}) => {
             {url?.title}
           </span>
           <span className="text-2xl text-blue-400 font-bold hover:underline cursor-pointer">
-            {WEB_URL}{url?.custom_url ? url?.custom_url : url.short_url}
+            {truncatedURL}
           </span>
           <span className="flex items-center gap-1 hover:underline cursor-pointer">
             <LinkIcon className="p-1" />

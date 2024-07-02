@@ -17,10 +17,13 @@ const DeviceStats = ({ stats }) => {
     count: deviceCount[device],
   }));
 
+  const isMobile = window.innerWidth <= 480;
+
   return (
-    <div style={{ width: "100%", height: 300 }}>
+    
+    <div style={{ width: "100%"}} className="h-[200px] sm:h-[400px]" >
       <ResponsiveContainer>
-        <PieChart width={700} height={400}>
+        <PieChart width={700} height={isMobile?300:400}>
           <Pie
             data={result}
             labelLine={false}
@@ -28,6 +31,8 @@ const DeviceStats = ({ stats }) => {
               `${device}: ${(percent * 100).toFixed(0)}%`
             }
             dataKey="count"
+            outerRadius={isMobile && 60 }
+            style={{ fontSize: isMobile && '10px'}}
           >
             {result.map((entry, index) => (
               <Cell
