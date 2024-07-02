@@ -8,5 +8,5 @@ export const WEB_URL="https://snipitt.netlify.app/"
 
  export const longtruncateURL = (text) => {
       if (!text || text.length <= 30) return text;
-      return `${text.slice(0,3)}...${text.slice(-60)}...`;
+      return `${text.slice(0,3)}...${text.slice(-25)}...`;
     };
