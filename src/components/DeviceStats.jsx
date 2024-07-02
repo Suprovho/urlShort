@@ -17,7 +17,7 @@ const DeviceStats = ({ stats }) => {
     count: deviceCount[device],
   }));
 
-  const isMobile = window.innerWidth <= 480;
+  const isMobile = window.innerWidth <= 370;
 
   return (
     
